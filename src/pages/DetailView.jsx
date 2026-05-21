@@ -86,9 +86,7 @@ export default function DetailView() {
     );
   }
 
-  const image =
-    restaurant.photos?.[0] ||
-    fallbackRestaurantImage;
+  const image = restaurant.photos?.[0] || fallbackRestaurantImage;
 
   const handleImageError = (event) => {
     event.currentTarget.src = fallbackRestaurantImage;

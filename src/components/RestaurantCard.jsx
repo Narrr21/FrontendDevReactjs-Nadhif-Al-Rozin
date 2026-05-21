@@ -19,9 +19,7 @@ function StatusBadge({ isOpen }) {
 
 export default function RestaurantCard({ restaurant }) {
   const navigate = useNavigate();
-  const image =
-    restaurant.photos?.[0] ||
-    fallbackRestaurantImage;
+  const image = restaurant.photos?.[0] || fallbackRestaurantImage;
   const primaryCategory = restaurant.categories?.[0] || "Uncategorized";
 
   const handleImageError = (event) => {

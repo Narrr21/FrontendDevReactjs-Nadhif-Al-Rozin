@@ -26,7 +26,9 @@ export default function ReviewItem({ review }) {
           </span>
         </div>
 
-        <p className="text-gray-600">{review.body || review.text || "No review text available."}</p>
+        <p className="text-gray-600">
+          {review.body || review.text || "No review text available."}
+        </p>
       </div>
     </article>
   );
