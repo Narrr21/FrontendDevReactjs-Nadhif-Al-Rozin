@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import StarRating from "./StarRating";
 
+const fallbackRestaurantImage =
+  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80";
+
 function StatusBadge({ isOpen }) {
   return (
     <span
@@ -18,8 +21,12 @@ export default function RestaurantCard({ restaurant }) {
   const navigate = useNavigate();
   const image =
     restaurant.photos?.[0] ||
-    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80";
+    fallbackRestaurantImage;
   const primaryCategory = restaurant.categories?.[0] || "Uncategorized";
+
+  const handleImageError = (event) => {
+    event.currentTarget.src = fallbackRestaurantImage;
+  };
 
   return (
     <article className="flex h-full flex-col overflow-hidden bg-white transition duration-200 hover:-translate-y-1">
@@ -29,6 +36,7 @@ export default function RestaurantCard({ restaurant }) {
           alt={restaurant.name}
           className="h-full w-full object-cover"
           loading="lazy"
+          onError={handleImageError}
         />
       </div>
 

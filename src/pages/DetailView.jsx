@@ -4,6 +4,9 @@ import ReviewItem from "../components/ReviewItem";
 import StarRating from "../components/StarRating";
 import { fetchRestaurantById } from "../data/restaurantsApi";
 
+const fallbackRestaurantImage =
+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=80";
+
 export default function DetailView() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -85,7 +88,11 @@ export default function DetailView() {
 
   const image =
     restaurant.photos?.[0] ||
-    "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=80";
+    fallbackRestaurantImage;
+
+  const handleImageError = (event) => {
+    event.currentTarget.src = fallbackRestaurantImage;
+  };
 
   return (
     <main className="flex flex-1 flex-col gap-8 py-2">
@@ -113,6 +120,7 @@ export default function DetailView() {
               src={image}
               alt={restaurant.name}
               className="h-full w-full object-cover"
+              onError={handleImageError}
             />
           </div>
 

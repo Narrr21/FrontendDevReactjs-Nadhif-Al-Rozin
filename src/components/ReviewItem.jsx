@@ -1,11 +1,19 @@
 export default function ReviewItem({ review }) {
+  const fallbackAvatar =
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80";
+
+  const handleImageError = (event) => {
+    event.currentTarget.src = fallbackAvatar;
+  };
+
   return (
     <article className="flex gap-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
       <img
-        src={review.avatar}
+        src={review.avatar || fallbackAvatar}
         alt={review.name}
         className="h-14 w-14 rounded-full object-cover ring-2 ring-slate-100"
         loading="lazy"
+        onError={handleImageError}
       />
 
       <div className="min-w-0 flex-1 space-y-2">
@@ -18,7 +26,7 @@ export default function ReviewItem({ review }) {
           </span>
         </div>
 
-        <p className="text-gray-600">{review.text}</p>
+        <p className="text-gray-600">{review.body || review.text || "No review text available."}</p>
       </div>
     </article>
   );
